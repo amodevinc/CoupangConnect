@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navigation from '../components/Navigation';
 import ProductGallery from '../components/ProductGallery';
 import CreateSharedCartModal from '../modals/CreateSharedCartModal';
 import { useSharedCart } from '../hooks/useSharedCart';
