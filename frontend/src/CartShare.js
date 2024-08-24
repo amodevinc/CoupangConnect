@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Button, ButtonOutlinePrimary, Input, InputWrapper, ButtonsVerticalWrapper, ButtonsHorizontalWrapper } from './styledComponents';
 import CustomTitleBar from  './components/PageTitleBar.js';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 const ShareCart = () => {
     const [data, setData] = useState([
@@ -76,7 +78,12 @@ const ShareCart = () => {
                 <Input value={link} readOnly/>
             </InputWrapper>
             <ButtonsVerticalWrapper>
-                <Button onClick={handleShare}>Share</Button>
+                <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip id="button-tooltip-1">Share your cart with your friends</Tooltip>}    
+                >
+                    <Button onClick={handleShare} data-toggle="popover">Share</Button>  
+                </OverlayTrigger>
                 <ButtonOutlinePrimary>Next</ButtonOutlinePrimary>
             </ButtonsVerticalWrapper>
         </Container>
