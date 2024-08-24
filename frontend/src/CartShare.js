@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Button, Input, InputWrapper, ButtonsVerticalWrapper, ButtonsHorizontalWrapper } from './styledComponents';
+import { Container, Button, ButtonOutlinePrimary, Input, InputWrapper, ButtonsVerticalWrapper, ButtonsHorizontalWrapper } from './styledComponents';
 import CustomTitleBar from  './components/PageTitleBar.js';
 
 const ShareCart = () => {
@@ -48,6 +48,23 @@ const ShareCart = () => {
         generateLink();
     }, [data]);
 
+    const handleShare = async () => {
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: 'Check this out!',
+              text: 'Here is a link I wanted to share with you.',
+              url: link,
+            });
+            console.log('Content shared successfully');
+          } catch (error) {
+            console.error('Error sharing content:', error);
+          }
+        } else {
+          console.log('Web Share API is not supported in your browser.');
+        }
+      };
+
     return (
         <Container>
             <CustomTitleBar
@@ -59,8 +76,8 @@ const ShareCart = () => {
                 <Input value={link} readOnly/>
             </InputWrapper>
             <ButtonsVerticalWrapper>
-                <Button>Share</Button>
-                <Button>Next</Button>
+                <Button onClick={handleShare}>Share</Button>
+                <ButtonOutlinePrimary>Next</ButtonOutlinePrimary>
             </ButtonsVerticalWrapper>
         </Container>
     );

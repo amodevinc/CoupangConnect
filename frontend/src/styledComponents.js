@@ -13,9 +13,75 @@ export const Container = styled.div`
 
 /* BUTTONS */
 export const Button = styled.button`
-    background-color: black;
-    color: white;
+    background-color: var(--primary);
+    color: var(--base);
     border: none;
+    font-size: 20px;
+    font-weight: 600;
+    width: 508px;
+    height: 56px;
+    border-radius: 6px;
+    text-align: center;
+    
+    &:hover {
+      background-color: var(--pressed-primary); 
+    }
+`
+
+export const ButtonDisabled = styled.button`
+    background-color: var(--disabled);
+    color: var(--textbordericon-disabled);
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+    width: 508px;
+    height: 56px;
+    border-radius: 6px;
+    text-align: center;
+`
+
+export const ButtonOutlineGhost = styled.button`
+    background-color: var(--base);
+    color: var(--textbordericon-disabled);
+    border: 1px solid var(--textbordericon-disabled);
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: 600;
+    width: 508px;
+    height: 56px;
+    border-radius: 6px;
+    text-align: center;
+`
+export const ButtonOutlinePrimary = styled.button`
+    background-color: var(--base);
+    color: var(--textbordericon-emphasis);
+    border: 1px solid var(--textbordericon-emphasis);
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: 600;
+    width: 508px;
+    height: 56px;
+    border-radius: 6px;
+    text-align: center;
+`
+
+export const ButtonOutlinePrimaryGreen = styled.button`
+    background-color: var(--base);
+    color: var(--green);
+    border: 1px solid var(--green);
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: 600;
+    width: 508px;
+    height: 56px;
+    border-radius: 6px;
+    text-align: center;
+`
+export const ButtonOutlinePrimaryRed = styled.button`
+    background-color: var(--base);
+    color: var(--red);
+    border: 1px solid var(--red);
+    box-sizing: border-box;
     font-size: 20px;
     font-weight: 600;
     width: 508px;
@@ -65,6 +131,8 @@ export const ButtonsHorizontalWrapper = styled.div`
   align-items: center;
   gap: 10px;
   width: 48vh;
+  justify-content: center;
+  margin: auto;
 `
 
 export const Wrapper = styled.div`
