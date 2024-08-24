@@ -54,6 +54,40 @@
   --invert: #151515;
 }
 
+h1 {
+  font-weight: regular;
+  font-size: 22px;
+}
+
+h2 {
+  font-weight: regular;
+  font-size: 18px;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+p {
+  font-weight: regular;
+  font-size: 16px;
+}
+
+p2 {
+  font-weight: regular;
+  font-size: 14px;
+}
+
+caption {
+  font-size: 1rem;
+  color: var(--textbordericon-ghost);
+}
+
+iframe {
+  border: none;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

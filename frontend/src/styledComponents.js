@@ -7,8 +7,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: spcae-between;
-  background: var(--background-5, #fafaff);
+  justify-content: space-between;
+  background-color: var(--base);
 `;
 
 /* BUTTONS */
@@ -49,6 +49,23 @@ export const ButtonWrapper = styled.div`
   justify-content: center;
   margin-top: auto; /* Pushes the button to the bottom */
 `;
+
+export const ButtonsVerticalWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+`;
+
+export const ButtonsHorizontalWrapper = styled.div`
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 48vh;
+`
 
 export const Wrapper = styled.div`
   width: 508px;

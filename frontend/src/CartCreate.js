@@ -1,10 +1,15 @@
 import React from 'react';
 import { Container, Button, Input, InputWrapper, ButtonWrapper } from './styledComponents';
+import CustomTitleBar from  './components/PageTitleBar.js';
 
 const CreateCart = () => {
     return (
         <Container>
-            <h1>Create Cart</h1>
+            <CustomTitleBar
+                leftIcon=""
+                rightIcon="close"
+                title="Create Cart"
+            />
             <InputWrapper>
                 <Input placeholder="John's cart" />
             </InputWrapper>

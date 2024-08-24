@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 /* Pages */
 import Transition from './Transition.js';
-import CreateCart from './CreateCart.js';
+import CreateCart from './CartCreate.js';
+import SelectItems from './CartSelectItems.js';
+import ShareCart from './CartShare.js';
 import PaymentSuccess from './PaymentSuccess.js';
-import SelectItems from './SelectItems.js';
 import Loading from './Loading.js';
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
       <Route exact path="/payment-success" element={<PaymentSuccess />} />
       <Route exact path="/select-items" element={<SelectItems />} />
       <Route exact path="/loading" element={<Loading />} />
+      <Route exact path="/share-cart" element={<ShareCart />} />
     </Routes>
     </BrowserRouter>
   )
