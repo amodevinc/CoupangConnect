@@ -1,12 +1,22 @@
 import React from 'react';
 import styles from '../css/CartSelectionDropdown.module.css';
+import { useUnifiedCart } from '../hooks/useUnifiedCart';
 
-const CartSelectionDropdown = ({ activeCartId, setActiveCartId, userCarts }) => {
+const CartSelectionDropdown = ({userId}) => {
+  const {
+    userCarts,
+    activeCartId,
+    setActiveCartIdCallback,
+  } = useUnifiedCart(userId);
   return (
     <div className={styles.dropdownContainer}>
       <select
         value={activeCartId}
-        onChange={(e) => setActiveCartId(e.target.value)}
+        onSelect={(e) => setActiveCartIdCallback(e.target.value)}
+        onChange={(e) => {
+          console.log('E: ', e.target.value)
+          setActiveCartIdCallback(e.target.value)
+        }}
         className={styles.select}
       >
         <option value="">Select a cart</option>

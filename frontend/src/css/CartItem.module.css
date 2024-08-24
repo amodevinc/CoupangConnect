@@ -1,0 +1,167 @@
+/* CartItem.module.css */
+.cartItem {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding: 16px;
+  }
+  
+  .itemHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  
+  .checkbox {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .removeButton {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+  }
+  
+  .itemContent {
+    display: flex;
+    margin-bottom: 12px;
+  }
+  
+  .itemImage {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 16px;
+  }
+  
+  .itemDetails {
+    flex-grow: 1;
+  }
+  
+  .itemName {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .itemPriceContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .discountPercentage {
+    background-color: #FF6600;
+    color: white;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-size: 12px;
+    margin-right: 8px;
+  }
+  
+  .itemPrice {
+    display: flex;
+    align-items: center;
+  }
+  
+  .originalPrice {
+    text-decoration: line-through;
+    color: #999;
+    margin-right: 8px;
+  }
+  
+  .discountedPrice {
+    font-weight: bold;
+  }
+  
+  .dynamicDiscount {
+    color: #FF6600;
+    font-size: 14px;
+    margin-left: 8px;
+  }
+  
+  .addedBy {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .addedByAvatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  .itemActions {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .quantityControl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  
+  .quantityControl button {
+    width: 28px;
+    height: 28px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .quantityControl span {
+    margin: 0 12px;
+  }
+  
+  .voteButtons {
+    display: flex;
+  }
+  
+  .voteButton {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+    background-color: white;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .disagreeButton {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    margin-right: 10px; /* Add some space between the buttons */
+  }
+  
+  .likeButton {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  
+  .voteButton.active.disagreeButton {
+    background-color: #FFEBEE;
+    color: #D32F2F;
+    border-color: #FFCDD2;
+  }
+  
+  .voteButton.active.likeButton {
+    background-color: #E8F5E9;
+    color: #388E3C;
+    border-color: #C8E6C9;
+  }

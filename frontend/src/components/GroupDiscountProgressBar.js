@@ -6,9 +6,9 @@ const GroupDiscountProgressBar = ({
   groupSize, 
   maxGroupSize, 
   currentDiscountPercentage, 
-  totalDiscount,
   totalDiscountWon
 }) => {
+
   const [prevGroupSize, setPrevGroupSize] = useState(groupSize);
 
   useEffect(() => {
@@ -46,7 +46,6 @@ const GroupDiscountProgressBar = ({
       </div>
       
       <div className={styles.discountInfo}>
-        <p>Current Discount: ${totalDiscount.toFixed(2)} / ₩{totalDiscountWon.toFixed(0)}</p>
         <p>Discount Percentage: {(currentDiscountPercentage * 100).toFixed(0)}%</p>
       </div>
     </div>
