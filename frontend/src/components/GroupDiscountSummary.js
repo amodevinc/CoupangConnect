@@ -19,9 +19,9 @@ const GroupDiscountSummary = ({ cartId, userId }) => {
 
   // Helper function to safely format numbers
   const safeToFixed = (number, decimalPlaces) => {
-    return number !== undefined && number !== null
-      ? Number(number).toFixed(decimalPlaces)
-      : 'N/A';
+    return number !== undefined && number !== null && !isNaN(number)
+      ? Number(number).toFixed(decimalPlaces).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      : '0';
   };
 
   return (

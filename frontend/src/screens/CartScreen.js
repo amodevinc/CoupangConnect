@@ -4,6 +4,7 @@ import CartItem from '../components/CartItem';
 import styles from '../css/Cart.module.css';
 import { useUnifiedCart } from '../hooks/useUnifiedCart';
 import PaymentScreen from './PaymentScreen';
+import ProductSearchScreen from './ProductSearchScreen';
 
 const CartScreen = ({ userId }) => {
   const { cartId } = useParams();
@@ -17,9 +18,11 @@ const CartScreen = ({ userId }) => {
     voteOnItem,
     completeCart,
     setActiveCartId,
+    addItemToCart
   } = useUnifiedCart(userId);
   const [localLoading, setLocalLoading] = useState(true);
   const [showPaymentScreen, setShowPaymentScreen] = useState(false);
+  const [showProductSearch, setShowProductSearch] = useState(false);
 
   useEffect(() => {
     console.log('CartId changed:', cartId);
@@ -44,6 +47,10 @@ const CartScreen = ({ userId }) => {
 
   const handleProceedToPayment = () => {
     setShowPaymentScreen(true);
+  };
+  const handleAddItem = (product) => {
+    addItemToCart(product);
+    setShowProductSearch(false);
   };
 
   if (localLoading) return <div>Loading...</div>;
@@ -102,12 +109,20 @@ const CartScreen = ({ userId }) => {
       </div>
       <div className={styles.bottomButtonsContainer}>
         <div className={styles.addItemContainer}>
-          <button className={styles.addItemButton}>Add Item</button>
+          <button className={styles.addItemButton} onClick={() => setShowProductSearch(true)}>
+            Add Item
+          </button>
         </div>
         <button className={styles.proceedToPaymentButton} onClick={handleProceedToPayment}>
           Pay
         </button>
       </div>
+      {showProductSearch && (
+        <ProductSearchScreen
+          onAddItem={handleAddItem}
+          onClose={() => setShowProductSearch(false)}
+        />
+      )}
     </div>
   );
 };

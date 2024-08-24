@@ -35,7 +35,7 @@ const CartItem = ({ item, selectAll, removeItemFromCart, updateItemQuantity, vot
               {isDiscounted && <span className={styles.originalPrice}>{item.totalPriceWon.toLocaleString()}원</span>}
               <span className={styles.discountedPrice}>{(isDiscounted ? item.totalDiscountedPriceWon : item.price_won).toLocaleString()}원</span>
             </div>
-            {isDiscounted && <span className={styles.dynamicDiscount}>⚡Dynamic Discount!</span>}
+            {item.group_discount_eligible && <span className={styles.dynamicDiscount}>⚡Dynamic Discount!</span>}
           </div>
           {item.addedBy && (
             <div className={styles.addedBy}>

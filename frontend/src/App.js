@@ -1,43 +1,67 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
+import Home from './screens/HomeScreen';
+import CartPage from './screens/CartScreen';
+import PaymentScreen from './screens/PaymentScreen';
+import styles from './css/App.module.css';
+import { useUnifiedCart } from './hooks/useUnifiedCart';
 
-/* Pages */
-import Transition from './Transition.js';
-import CreateCart from './CartCreate.js';
-import SelectItems from './CartSelectItems.js';
-import ShareCart from './CartShare.js';
-import PaymentSuccess from './PaymentSuccess.js';
-import Loading from './Loading.js';
+// CartLink component to handle cart navigation and setting active cart ID
+const CartLink = ({ cart, setActiveCartId }) => {
+  const navigate = useNavigate(); // This will work now since CartLink is within Router
 
-function App() {
-  /*
-  const [isLoading, setIsLoading] = useState(true);
+  const handleCartClick = () => {
+    console.log('Cart id: ', cart.id)
+    setActiveCartId(cart.id); // Set the active cart ID
+    navigate(`/cart/${cart.id}`); // Navigate to the cart page
+  };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 5000) // 5000 milliseconds = 5 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
-  */
   return (
-    /*<div className="App">
-      {isLoading ? <Transition/> : <PaymentSuccess/>}
-    </div>*/
-    <BrowserRouter>
-    <Routes>
-      <Route exact path="/" element={<Transition />} />
-      <Route exact path="/create-cart" element={<CreateCart />} />
-      <Route exact path="/payment-success" element={<PaymentSuccess />} />
-      <Route exact path="/select-items" element={<SelectItems />} />
-      <Route exact path="/loading" element={<Loading />} />
-      <Route exact path="/share-cart" element={<ShareCart />} />
-    </Routes>
-    </BrowserRouter>
-  )
-}
+    <button className={styles.navLink} onClick={handleCartClick}>
+      {cart.name}
+    </button>
+  );
+};
+
+const App = () => {
+  const userId = 'current-user-id'; // Replace with actual user ID from your auth system
+  const { userCarts, setActiveCartId } = useUnifiedCart(userId);
+
+  return (
+    <Router>
+      <div className={styles.app}>
+        <nav className={styles.nav}>
+          <Link to="/" className={styles.navLink}>Home</Link>
+          <div className={styles.dropdown}>
+            <button className={styles.dropbtn}>Carts</button>
+            <div className={styles.dropdownContent}>
+              <Link to="/cart/individual" className={styles.navLink}>Individual Cart</Link>
+              {userCarts.map(cart => (
+                <CartLink
+                  key={cart.id}
+                  cart={cart}
+                  setActiveCartId={setActiveCartId}
+                />
+              ))}
+            </div>
+          </div>
+          {userId ? (
+            <Link to="/profile" className={styles.navLink}>Profile</Link>
+          ) : (
+            <Link to="/login" className={styles.navLink}>Login</Link>
+          )}
+        </nav>
+        <main className={styles.main}>
+          <Routes>
+            <Route path="/" element={<Home userId={userId} />} />
+            <Route path="/cart/:cartId" element={<CartPage userId={userId} />} />
+            <Route path="/payment/:cartId" element={<PaymentScreen userId={userId} />} />
+            {/* Add more routes as needed */}
+          </Routes>
+        </main>
+      </div>
+    </Router>
+  );
+};
 
 export default App;

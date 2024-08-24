@@ -22,6 +22,12 @@ export const useUnifiedCart = (userId) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const safeToFixed = (number, decimalPlaces) => {
+        return number !== undefined && number !== null && !isNaN(number)
+          ? Number(number).toFixed(decimalPlaces).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          : '0';
+      };
+
     useEffect(() => {
         if (!userId) {
             setLoading(false);
@@ -77,11 +83,11 @@ export const useUnifiedCart = (userId) => {
             return {
                 ...item,
                 quantity,
-                discountPercentage: currentDiscountPercentage,
-                discountAmountWon,
-                discountedPriceWon,
-                totalPriceWon: item.price_won * quantity,
-                totalDiscountedPriceWon: discountedPriceWon * quantity,
+                discountPercentage: safeToFixed(currentDiscountPercentage, 0),
+                discountAmountWon: safeToFixed(discountAmountWon, 0),
+                discountedPriceWon: safeToFixed(discountedPriceWon, 0),
+                totalPriceWon: safeToFixed(item.price_won * quantity, 0),
+                totalDiscountedPriceWon: safeToFixed(discountedPriceWon * quantity, 0),
             };
         } else {
             return {
@@ -101,7 +107,7 @@ export const useUnifiedCart = (userId) => {
 
         return activeCart.items.reduce((acc, item) => {
             const calculatedItem = calculateItemDiscount(item);
-            if (item.group_discount_eligible) {
+            if (item.group_discount_eligible && activeCart.members.length > 1) {
                 acc.discountedItems.push(calculatedItem);
             } else {
                 acc.regularItems.push(calculatedItem);

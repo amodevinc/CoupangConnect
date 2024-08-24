@@ -21,9 +21,9 @@ if (!activeCart) {
     const sortItems = (items) => [...items].sort((a, b) => ((b.votes || 0) - (a.votes || 0)));
 
     const safeToFixed = (number, decimalPlaces) => {
-        return number !== undefined && number !== null
-            ? Number(number).toFixed(decimalPlaces)
-            : 'N/A';
+      return number !== undefined && number !== null && !isNaN(number)
+        ? Number(number).toFixed(decimalPlaces).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        : '0';
     };
 
     const renderItem = (item, isDiscounted) => (

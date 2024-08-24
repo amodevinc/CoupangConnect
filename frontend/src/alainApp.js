@@ -1,13 +1,31 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import Home from './screens/HomeScreen';
 import CartPage from './screens/CartScreen';
+import PaymentScreen from './screens/PaymentScreen';
 import styles from './css/App.module.css';
 import { useUnifiedCart } from './hooks/useUnifiedCart';
 
+// CartLink component to handle cart navigation and setting active cart ID
+const CartLink = ({ cart, setActiveCartId }) => {
+  const navigate = useNavigate(); // This will work now since CartLink is within Router
+
+  const handleCartClick = () => {
+    console.log('Cart id: ', cart.id)
+    setActiveCartId(cart.id); // Set the active cart ID
+    navigate(`/cart/${cart.id}`); // Navigate to the cart page
+  };
+
+  return (
+    <button className={styles.navLink} onClick={handleCartClick}>
+      {cart.name}
+    </button>
+  );
+};
+
 const App = () => {
   const userId = 'current-user-id'; // Replace with actual user ID from your auth system
-  const { userCarts } = useUnifiedCart(userId);
+  const { userCarts, setActiveCartId } = useUnifiedCart(userId);
 
   return (
     <Router>
@@ -19,13 +37,11 @@ const App = () => {
             <div className={styles.dropdownContent}>
               <Link to="/cart/individual" className={styles.navLink}>Individual Cart</Link>
               {userCarts.map(cart => (
-                <Link 
-                  key={cart.id} 
-                  to={`/cart/${cart.id}`} 
-                  className={styles.navLink}
-                >
-                  {cart.name}
-                </Link>
+                <CartLink
+                  key={cart.id}
+                  cart={cart}
+                  setActiveCartId={setActiveCartId}
+                />
               ))}
             </div>
           </div>
@@ -35,11 +51,11 @@ const App = () => {
             <Link to="/login" className={styles.navLink}>Login</Link>
           )}
         </nav>
-
         <main className={styles.main}>
           <Routes>
             <Route path="/" element={<Home userId={userId} />} />
             <Route path="/cart/:cartId" element={<CartPage userId={userId} />} />
+            <Route path="/payment/:cartId" element={<PaymentScreen userId={userId} />} />
             {/* Add more routes as needed */}
           </Routes>
         </main>
@@ -47,3 +63,5 @@ const App = () => {
     </Router>
   );
 };
+
+export default App;
