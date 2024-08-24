@@ -1,25 +1,51 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
-import { ProductGallery } from './components/ProductGallery';
-import { ProductDetails } from './components/ProductDetails';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Home from './screens/HomeScreen';
+import CartPage from './screens/CartScreen';
+import { useSharedCart } from './hooks/useSharedCart';
+import styles from './css/App.module.css';
 
-function App() {
+const App = () => {
+  const userId = 'current-user-id'; // Replace with actual user ID from your auth system
+  const { userCarts } = useSharedCart(userId);
+
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <h1>CoupangConnect</h1>
-        </header>
-        <main>
+      <div className={styles.app}>
+        <nav className={styles.nav}>
+          <Link to="/" className={styles.navLink}>Home</Link>
+          <div className={styles.dropdown}>
+            <button className={styles.dropbtn}>Carts</button>
+            <div className={styles.dropdownContent}>
+              <Link to="/cart/individual" className={styles.navLink}>Individual Cart</Link>
+              {userCarts.map(cart => (
+                <Link 
+                  key={cart.id} 
+                  to={`/cart/${cart.id}`} 
+                  className={styles.navLink}
+                >
+                  {cart.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+          {userId ? (
+            <Link to="/profile" className={styles.navLink}>Profile</Link>
+          ) : (
+            <Link to="/login" className={styles.navLink}>Login</Link>
+          )}
+        </nav>
+
+        <main className={styles.main}>
           <Routes>
-            <Route exact path="/" element={<ProductGallery />} />
-            <Route path="/product/:productId" element={<ProductDetails />} />
+            <Route path="/" element={<Home userId={userId} />} />
+            <Route path="/cart/:cartId" element={<CartPage userId={userId} />} />
+            {/* Add more routes as needed */}
           </Routes>
         </main>
       </div>
     </Router>
   );
-}
+};
 
 export default App;

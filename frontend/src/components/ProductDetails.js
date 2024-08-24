@@ -1,14 +1,19 @@
 // src/components/ProductDetails.js
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useProducts } from '../hooks/useProducts';
 import { useReviews } from '../hooks/useReviews';
+import { useSharedCart } from '../hooks/useSharedCart';
+
 
 export const ProductDetails = () => {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const { products } = useProducts();
   const { reviews, loading: reviewsLoading, error: reviewsError, addReview } = useReviews(productId, 5);
   const [newReview, setNewReview] = useState({ rating: 5, content: '' });
+  const [cartId, setCartId] = useState('');
+  const { createCart, addToCart } = useSharedCart(cartId);
 
   const product = products.find(p => p.id === productId);
   if (!product) return <div>Product not found</div>;
@@ -21,6 +26,19 @@ export const ProductDetails = () => {
       ...newReview
     });
     setNewReview({ rating: 5, content: '' });
+  };
+
+  const handleAddToSharedCart = async () => {
+    try {
+      if (!cartId) {
+        const newCartId = await createCart(`Shared Cart for ${product.name}`);
+        setCartId(newCartId);
+      }
+      await addToCart(product);
+      navigate(`/shared-cart/${cartId}`);
+    } catch (error) {
+      console.error("Error adding to shared cart: ", error);
+    }
   };
 
   return (
@@ -40,6 +58,10 @@ export const ProductDetails = () => {
         Max Discount: ${product.max_discount_value.toFixed(2)} / ₩{product.max_discount_value_won.toFixed(0)}
       </p>
       <p>{product.description}</p>
+
+      <button onClick={handleAddToSharedCart}>Add to Shared Cart</button>
+
+      
       <p>Review Summary: {product.review_summary}</p>
       <p>Review Sentiment: {product.review_sentiment.toFixed(2)}</p>
 

@@ -1,35 +1,48 @@
-// src/components/ProductGallery.js
 import React from 'react';
 import { useProducts } from '../hooks/useProducts';
-import { Link } from 'react-router-dom';
+import { useSharedCart } from '../hooks/useSharedCart';
+import styles from '../css/ProductGallery.module.css';
 
-export const ProductGallery = () => {
-  const { products, loading, error } = useProducts(20); // Fetch 20 products
+const ProductGallery = ({ selectedCart, userId }) => {
+  const { products, loading, error } = useProducts(20);
+  const { addItemToCart } = useSharedCart(userId);
 
-  if (loading) return <div>Loading products...</div>;
-  if (error) return <div>Error loading products: {error.message}</div>;
+  if (loading) return <div className={styles.loading}>Loading products...</div>;
+  if (error) return <div className={styles.error}>Error: {error.message}</div>;
+
+  const handleAddToCart = (product) => {
+    if (!userId) {
+      alert('Please log in to add items to your cart.');
+      return;
+    }
+    addItemToCart(selectedCart, {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1
+    });
+  };
 
   return (
-    <div className="product-gallery">
+    <div className={styles.gallery}>
       {products.map(product => (
-        <div key={product.id} className="product-card">
-          <img src={product.image_url} alt={product.name} className="product-image" />
-          <h3>{product.name}</h3>
-          <p>{product.category}</p>
-          <p className="product-price">
+        <div key={product.id} className={styles.productCard}>
+          <img src={product.image_url} alt={product.name} className={styles.productImage} />
+          <h3 className={styles.productName}>{product.name}</h3>
+          <p className={styles.productCategory}>{product.category}</p>
+          <p className={styles.productPrice}>
             ${product.price.toFixed(2)} / ₩{product.price_won.toFixed(0)}
-            {product.group_discount_eligible && (
-              <span className="group-discount-badge">
-                Group Discount Eligible
-              </span>
-            )}
           </p>
-          <p className="max-discount">
-            Max Discount: ${product.max_discount_value.toFixed(2)} / ₩{product.max_discount_value_won.toFixed(0)}
-          </p>
-          <Link to={`/product/${product.id}`}>View Details</Link>
+          <button
+            onClick={() => handleAddToCart(product)}
+            className={styles.addToCartButton}
+          >
+            Add to Cart
+          </button>
         </div>
       ))}
     </div>
   );
 };
+
+export default ProductGallery;

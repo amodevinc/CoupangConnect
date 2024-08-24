@@ -1,0 +1,79 @@
+.cartView {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .cartName {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .cartTheme {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .itemList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .itemCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .itemInfo {
+    flex-grow: 1;
+  }
+  
+  .itemName {
+    font-size: 18px;
+    margin: 0 0 5px 0;
+  }
+  
+  .itemPrice {
+    font-size: 16px;
+    color: #007bff;
+  }
+  
+  .itemActions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .voteButton {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 5px;
+  }
+  
+  .voteCount {
+    font-size: 16px;
+    margin: 0 10px;
+  }
+  
+  .removeButton {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .removeButton:hover {
+    background-color: #c82333;
+  }
