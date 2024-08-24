@@ -1,0 +1,11 @@
+/* src/css/AIRecommendation.module.css */
+.aiRecommendation {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    max-height: 100px;
+    overflow-y: auto;
+  }

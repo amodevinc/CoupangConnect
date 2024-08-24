@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Button, Input, InputWrapper, ButtonsVerticalWrapper, ButtonsHorizontalWrapper } from './styledComponents';
 import CustomTitleBar from  './components/PageTitleBar.js';
+import styles from './css/Cart.module.css';
 
 const ShareCart = () => {
+
+    const onShareClick = () => {
+        console.log('share clicked');
+    }
+    const onNextClick = () => {
+        console.log('next clicked');
+    }
     const [data, setData] = useState([
         {
             cart: "Summer Camping",
@@ -58,10 +66,10 @@ const ShareCart = () => {
             <InputWrapper>
                 <Input value={link} readOnly/>
             </InputWrapper>
-            <ButtonsVerticalWrapper>
-                <Button>Share</Button>
-                <Button>Next</Button>
-            </ButtonsVerticalWrapper>
+            <div className={styles.shareButtonsBottomContainer}>
+                <button className={styles.shareButton} onClick={onShareClick}>Share</button>
+                <button className={styles.nextButton} onClick={onNextClick}>Next</button>
+            </div>
         </Container>
     );
 }

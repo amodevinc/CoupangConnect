@@ -147,6 +147,7 @@ export const useUnifiedCart = (userId) => {
             };
             const docRef = await addDoc(collection(db, 'sharedCarts'), newCart);
             setActiveCartId(docRef.id);
+            return docRef.id;
         } catch (err) {
             console.error("Error creating shared cart: ", err);
             setError(err);

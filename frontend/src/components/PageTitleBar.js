@@ -23,6 +23,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom'; // Use useNavigate instead of useHistory
 import { ICONS } from './Icons.js'; // Import the icon mapping
 import { ReactComponent as LogoSVG } from '../coupang_connect/coupang_connect_logo_small.svg';
 
@@ -53,6 +54,7 @@ const IconContainer = styled.div`
   }
 `;
 
+
 // Styled logo container
 const LogoContainer = styled.div`
   flex-grow: 1;
@@ -69,11 +71,30 @@ const LogoContainer = styled.div`
 const CustomTitleBar = ({
   leftIcon,
   rightIcon,
-  title = 'My Title',
+  title = '',
   logoVersion = false,
 }) => {
+  const navigate = useNavigate(); // Use useNavigate hook
+  
   const LeftIconComponent = ICONS[leftIcon];
   const RightIconComponent = ICONS[rightIcon];
+  
+  // Define click handlers for navigation
+  const handleLeftIconClick = () => {
+    if (leftIcon === 'arrow') {
+      navigate(-1); // Go to the previous page
+    } else if (leftIcon === 'close') {
+      navigate('/'); // Go to the home page
+    }
+  };
+
+  const handleRightIconClick = () => {
+    if (rightIcon === 'link') {
+      navigate('/share-cart'); // Go to the share page
+    } else if (rightIcon === 'close') {
+      navigate('/');
+    }
+  };
 
   return (
     <HeaderContainer>
@@ -83,11 +104,11 @@ const CustomTitleBar = ({
         </LogoContainer>
       ) : (
         <>
-          <IconContainer visible={!!LeftIconComponent}>
+          <IconContainer visible={!!LeftIconComponent} onClick={handleLeftIconClick}>
             {LeftIconComponent && <LeftIconComponent />}
           </IconContainer>
           <Title>{title}</Title>
-          <IconContainer visible={!!RightIconComponent}>
+          <IconContainer visible={!!RightIconComponent} onClick={handleRightIconClick}>
             {RightIconComponent && <RightIconComponent />}
           </IconContainer>
         </>
@@ -95,4 +116,5 @@ const CustomTitleBar = ({
     </HeaderContainer>
   );
 };
+
 export default CustomTitleBar;

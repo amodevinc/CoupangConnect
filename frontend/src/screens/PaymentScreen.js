@@ -40,7 +40,7 @@ const PaymentScreen = ({
       // Here you would integrate with your payment gateway
       await new Promise(resolve => setTimeout(resolve, 2000));
       await completeCart();
-      navigate(`/payment-confirmation/${activeCart.id}`);
+      navigate(`/payment-success`);
     } catch (error) {
       console.error('Payment failed:', error);
       // Handle payment failure (show error message, etc.)

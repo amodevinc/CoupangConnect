@@ -45,9 +45,6 @@ const GroupDiscountProgressBar = ({
         </div>
       </div>
       
-      <div className={styles.discountInfo}>
-        <p>Discount Percentage: {(currentDiscountPercentage * 100).toFixed(0)}%</p>
-      </div>
     </div>
   );
 };

@@ -1,8 +1,14 @@
 import React from 'react';
 import { Container, Button, Wrapper, ButtonWrapper } from './styledComponents';
+import { useNavigate } from 'react-router-dom';
 //import icon from './assets/success.svg';
 
 const PaymentSuccess = () => {
+    const navigate = useNavigate();
+
+    const routeToHome = () => {
+        navigate(`/`);
+    }
     return (
         <Container>
             <Wrapper>
@@ -13,7 +19,7 @@ const PaymentSuccess = () => {
                 </header>
             </Wrapper>
             <ButtonWrapper>
-                <Button>Done</Button>
+                <Button onClick={routeToHome}>Done</Button>
             </ButtonWrapper>
         </Container>
     )

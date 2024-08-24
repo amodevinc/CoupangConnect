@@ -11,30 +11,6 @@ export const Container = styled.div`
   background-color: var(--base);
 `;
 
-/* BUTTONS */
-export const Button = styled.button`
-    background-color: black;
-    color: white;
-    border: none;
-    font-size: 20px;
-    font-weight: 600;
-    width: 508px;
-    height: 56px;
-    border-radius: 6px;
-    text-align: center;
-`
-
-/* INPUT */
-export const Input = styled.input`
-    width: 508px;
-    height: 48px;
-    font-size: 20px;
-    border-radius: 8px;
-    border: 1px solid gray;
-    background-color: white;
-    padding-left: 16px;
-`
-
 /* WRAPPERS */
 export const InputWrapper = styled.div`
   width: 508px;
@@ -66,10 +42,77 @@ export const ButtonsHorizontalWrapper = styled.div`
   gap: 10px;
   width: 48vh;
 `
-
 export const Wrapper = styled.div`
   width: 508px;
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+export const FormContainer = styled.div`
+  width: 100%;
+  max-width: 508px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+`;
+
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+export const Label = styled.label`
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  height: 48px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: white;
+  padding: 0 16px;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+`;
+
+export const ErrorMessage = styled.p`
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 8px;
+`;
+
+
+export const Button = styled.button`
+  background-color: black;
+  color: white;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  width: 100%;
+  max-width: 508px;
+  height: 56px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #f76800;
+  }
+
+  &:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
 `;
