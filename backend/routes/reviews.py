@@ -2,9 +2,12 @@ from fastapi import APIRouter, HTTPException
 from firebase_admin import firestore
 from pydantic import BaseModel
 from typing import List
+import os
+from openai import OpenAI
 
 router = APIRouter()
 db = firestore.client()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 class Review(BaseModel):
     user_id: str
