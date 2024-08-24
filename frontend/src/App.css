@@ -58,3 +58,7 @@ caption {
   font-size: 1rem;
   color: var(--textbordericon-ghost);
 }
+
+iframe {
+  border: none;
+}
