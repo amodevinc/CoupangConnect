@@ -1,0 +1,60 @@
+.App {
+  text-align: center;
+}
+
+.Transition {
+  text-align: center;
+}
+
+.Transition-logo {
+  height: 10vmin;
+  pointer-events: none;
+}
+
+.Transition-header {
+  background-color: rgba(0, 0, 0, 0);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+.Success-header {
+  background-color: rgba(0, 0, 0, 0);
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+.Success-logo {
+  height: 15vmin;
+  pointer-events: none;
+}
+
+.Loading-header {
+  background-color: rgba(0, 0, 0, 0);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+.Loading-logo {
+  height: 15vmin;
+  pointer-events: none;
+}
+
+caption {
+  font-size: 1rem;
+  color: var(--textbordericon-ghost);
+}
