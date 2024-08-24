@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useProducts } from '../hooks/useProducts';
 import { useReviews } from '../hooks/useReviews';
-import { useSharedCart } from '../hooks/useSharedCart';
+import { useUnifiedCart } from '../hooks/useUnifiedCart';
 
 
 export const ProductDetails = () => {
@@ -13,7 +13,7 @@ export const ProductDetails = () => {
   const { reviews, loading: reviewsLoading, error: reviewsError, addReview } = useReviews(productId, 5);
   const [newReview, setNewReview] = useState({ rating: 5, content: '' });
   const [cartId, setCartId] = useState('');
-  const { createCart, addToCart } = useSharedCart(cartId);
+  const { createCart, addToCart } = useUnifiedCart(cartId);
 
   const product = products.find(p => p.id === productId);
   if (!product) return <div>Product not found</div>;

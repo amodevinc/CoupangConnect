@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import ProductGallery from '../components/ProductGallery';
 import CreateSharedCartModal from '../modals/CreateSharedCartModal';
-import { useSharedCart } from '../hooks/useSharedCart';
 import styles from '../css/Home.module.css';
+import { useUnifiedCart } from '../hooks/useUnifiedCart';
 
 const Home = ({ userId }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { createSharedCart, loading, error } = useSharedCart(userId);
+    const { createSharedCart, loading, error } = useUnifiedCart(userId);
   
     const handleCreateSharedCart = (name, theme) => {
       createSharedCart(name, theme);

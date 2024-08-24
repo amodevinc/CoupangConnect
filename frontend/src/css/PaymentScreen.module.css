@@ -1,0 +1,295 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    font-family: "Pretendard", sans-serif;
+    color: var(--textbordericon-primary);
+    background-color: #fff;
+    min-height: 100vh;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--neutral-300);
+  }
+  
+  .backButton {
+    background: none;
+    border: none;
+    font-size: 2rem; /* Slightly larger for emphasis */
+    cursor: pointer;
+    padding: 0;
+    margin-right: 1rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .paymentSection {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--neutral-0);
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .sectionTitle {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .radioLabel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .radioText {
+    font-size: 0.9rem;
+    color: var(--textbordericon-primary);
+  }
+  
+  .radioInput {
+    margin-right: 0.5rem;
+  }
+  
+  .paymentMethod {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--neutral-0);
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .paymentMethod span {
+    font-size: 1rem;
+    font-weight: normal;
+  }
+  
+  .paymentMethod span:last-child {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--textbordericon-secondary);
+  }
+  
+  .deliverySection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--neutral-0);
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .deliveryInfo {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .deliveryInfo p {
+    margin: 0.2rem 0;
+  }
+  
+  .deliverySection span {
+    font-size: 1.5rem;
+    color: var(--textbordericon-secondary);
+  }
+  
+  .totalSection {
+    background-color: var(--neutral-0);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .paymentOptions {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  .methodSelect,
+  
+  .orderItems {
+    margin-bottom: 1rem;
+  }
+  
+  .orderItem {
+    display: flex;
+    align-items: center;
+    background-color: var(--neutral-0);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .productImage {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 0.25rem;
+    margin-right: 1rem;
+  }
+  
+  .itemInfo {
+    flex-grow: 1;
+  }
+  
+  .discount {
+    color: var(--brand-400);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  .price {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  .originalPrice {
+    color: var(--textbordericon-tertiary);
+    text-decoration: line-through;
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .quantity {
+    font-size: 0.75rem;
+    color: var(--textbordericon-secondary);
+  }
+  
+  .totalSection {
+    font-weight: 600;
+  }
+  
+  .payNowButton {
+    width: 100%;
+    background-color: var(--brand-400);
+    color: var(--neutral-0);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .payNowButton:hover:not(:disabled) {
+    background-color: var(--brand-600);
+  }
+  
+  .payNowButton:disabled {
+    background-color: var(--neutral-300);
+    cursor: not-allowed;
+  }
+  .orderItems {
+    margin-bottom: 1rem;
+  }
+  
+  .orderItem {
+    display: flex;
+    align-items: center;
+    background-color: var(--neutral-0);
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .productImage {
+    width: 70px; /* Make images slightly bigger */
+    height: 70px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+  }
+  
+  .itemInfo {
+    flex-grow: 1;
+  }
+  
+  .itemName {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  .price, .originalPrice {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .originalPrice {
+    color: var(--textbordericon-tertiary);
+    text-decoration: line-through;
+    font-size: 0.875rem;
+  }
+  
+  .quantity {
+    font-size: 0.875rem;
+    color: var(--textbordericon-secondary);
+  }
+  
+  .discount {
+    font-size: 0.9rem;
+    color: var(--brand-400);
+    font-weight: 600;
+  }
+
+  .totalSection {
+    padding: 1.25rem;
+    background-color: var(--neutral-0);
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .totalSection p {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .payNowButton {
+    width: 100%;
+    background-color: #ff7f27;
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .payNowButton:hover:not(:disabled) {
+    background-color: #d36b20;
+  }
+  
+  .payNowButton:disabled {
+    background-color: var(--neutral-300);
+    cursor: not-allowed;
+  }
+  
+  
+  

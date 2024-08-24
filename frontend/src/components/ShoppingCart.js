@@ -1,19 +1,18 @@
 import React from 'react';
-import { useSharedCart } from './hooks/useSharedCart';
 
 const ShoppingCartComponent = ({ userId }) => {
-  const {
-    cart,
-    loading,
-    error,
-    addItem,
-    removeItem,
-    updateItemQuantity,
-    inviteUser,
-    removeUser,
-    completeCart,
-    calculateTotal
-  } = useSharedCart(userId);
+  // const {
+  //   cart,
+  //   loading,
+  //   error,
+  //   addItem,
+  //   removeItem,
+  //   updateItemQuantity,
+  //   inviteUser,
+  //   removeUser,
+  //   completeCart,
+  //   calculateTotal
+  // } = use(userId);
 
   if (loading) return <div>Loading cart...</div>;
   if (error) return <div>Error: {error.message}</div>;
