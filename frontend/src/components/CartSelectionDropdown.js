@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from '../css/CartSelectionDropdown.module.css';
 
-const CartSelectionDropdown = ({ selectedCart, setSelectedCart, userCarts }) => {
+const CartSelectionDropdown = ({ activeCartId, setActiveCartId, userCarts }) => {
   return (
     <div className={styles.dropdownContainer}>
       <select
-        value={selectedCart}
-        onChange={(e) => setSelectedCart(e.target.value)}
+        value={activeCartId}
+        onChange={(e) => setActiveCartId(e.target.value)}
         className={styles.select}
       >
-        <option value="individual">Individual Cart</option>
+        <option value="">Select a cart</option>
         {userCarts.map((cart) => (
           <option key={cart.id} value={cart.id}>
             {cart.name}

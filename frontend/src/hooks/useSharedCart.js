@@ -15,36 +15,57 @@ import {
 } from 'firebase/firestore';
 
 export const useSharedCart = (userId) => {
-  const [userCarts, setUserCarts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    if (!userId) {
-      setLoading(false);
-      return;
-    }
-
-    const q = query(
-      collection(db, 'sharedCarts'),
-      where('members', 'array-contains', userId)
-    );
-
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const carts = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setUserCarts(carts);
-      setLoading(false);
-    }, (err) => {
-      console.error("Error fetching carts: ", err);
-      setError(err);
-      setLoading(false);
-    });
-
-    return unsubscribe;
-  }, [userId]);
+    const [userCarts, setUserCarts] = useState([]);
+    const [activeCartId, setActiveCartId] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+  
+    useEffect(() => {
+      if (!userId) {
+        setLoading(false);
+        return;
+      }
+  
+      const q = query(
+        collection(db, 'sharedCarts'),
+        where('members', 'array-contains', userId)
+      );
+  
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const carts = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setUserCarts(carts);
+        if (!activeCartId && carts.length > 0) {
+          setActiveCartId(carts[0].id);
+        }
+        setLoading(false);
+      }, (err) => {
+        console.error("Error fetching carts: ", err);
+        setError(err);
+        setLoading(false);
+      });
+  
+      return unsubscribe;
+    }, [userId, activeCartId]);
+  
+    const addItemToCart = useCallback(async (item) => {
+      if (!activeCartId) {
+        console.error("No active cart selected");
+        return;
+      }
+      try {
+        const cartRef = doc(db, 'sharedCarts', activeCartId);
+        await updateDoc(cartRef, {
+          items: arrayUnion({...item, votes: 0}),
+          updatedAt: serverTimestamp()
+        });
+      } catch (err) {
+        console.error("Error adding item to cart: ", err);
+        setError(err);
+      }
+    }, [activeCartId]);
 
   const createSharedCart = useCallback(async (name, theme) => {
     if (!userId) {
@@ -68,18 +89,6 @@ export const useSharedCart = (userId) => {
     }
   }, [userId]);
 
-  const addItemToCart = useCallback(async (cartId, item) => {
-    try {
-      const cartRef = doc(db, 'sharedCarts', cartId);
-      await updateDoc(cartRef, {
-        items: arrayUnion({...item, votes: 0}),
-        updatedAt: serverTimestamp()
-      });
-    } catch (err) {
-      console.error("Error adding item to cart: ", err);
-      setError(err);
-    }
-  }, []);
 
   const removeItemFromCart = useCallback(async (cartId, itemId) => {
     try {
@@ -210,6 +219,7 @@ export const useSharedCart = (userId) => {
     userCarts,
     loading,
     error,
+    activeCartId,
     createSharedCart,
     addItemToCart,
     removeItemFromCart,
@@ -220,6 +230,7 @@ export const useSharedCart = (userId) => {
     deleteCart,
     upvoteItem,
     downvoteItem,
-    calculateTotal
+    calculateTotal,
+    setActiveCartId
   };
 };

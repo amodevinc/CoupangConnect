@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import CartView from '../components/CartView';
+import GroupDiscountSummary from '../components/GroupDiscountSummary';
 import { useSharedCart } from '../hooks/useSharedCart';
 import styles from '../css/Cart.module.css';
 
@@ -21,8 +22,8 @@ const CartScreen = ({ userId }) => {
       <div className={styles.container}>
         <h1 className={styles.title}>{cart.name}</h1>
         <CartView cartId={cartId} userId={userId} />
+        {cartId !== 'individual' && <GroupDiscountSummary cartId={cartId} userId={userId} />}
       </div>
     );
   };
-
 export default CartScreen;

@@ -1,6 +1,6 @@
 // src/hooks/useProducts.js
 import { useState, useEffect } from 'react';
-import { collection, doc, onSnapshot, query, limit } from 'firebase/firestore';
+import { collection, onSnapshot, query, limit } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
 export const useProducts = (limitCount = 20) => {

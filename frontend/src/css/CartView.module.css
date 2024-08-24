@@ -77,3 +77,19 @@
   .removeButton:hover {
     background-color: #c82333;
   }
+  .groupInfo,
+.discountInfo {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+}
+
+.discountedPrice {
+  color: #48bb78;
+  font-weight: bold;
+}
+
+.discountPercentage {
+  font-size: 0.875rem;
+  color: #48bb78;
+}
