@@ -5,7 +5,7 @@ const Transition = () => {
   return (
     <div className="Transition">
       <header className="Transition-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} className="Transition-logo" alt="logo" />
       </header>
     </div>
   );
