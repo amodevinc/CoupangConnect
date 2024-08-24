@@ -1,14 +1,22 @@
-import logo from './coupang_connect/coupang_connect_logo.png';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import Transition from './Transition.js';
+import CreateCart from './CreateCart.js';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000) // 5000 milliseconds = 5 seconds
+  }, []); 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
+      {isLoading ? <Transition/> : <CreateCart/>}
     </div>
-  );
+  )
 }
 
 export default App;
