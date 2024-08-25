@@ -71,6 +71,7 @@ const LogoContainer = styled.div`
 const CustomTitleBar = ({
   leftIcon,
   rightIcon,
+  onRightIconClick,
   title = '',
   logoVersion = false,
 }) => {
@@ -89,11 +90,15 @@ const CustomTitleBar = ({
   };
 
   const handleRightIconClick = () => {
+    if(onRightIconClick!==undefined){
+      onRightIconClick();
+    }else {
     if (rightIcon === 'link') {
       navigate('/share-cart'); // Go to the share page
     } else if (rightIcon === 'close') {
       navigate('/');
     }
+  }
   };
 
   return (

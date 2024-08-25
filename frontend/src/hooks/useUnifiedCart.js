@@ -4,6 +4,9 @@ import {
   collection, 
   doc, 
   addDoc,
+  getDoc,
+  getDocs,
+  increment,
   updateDoc, 
   onSnapshot, 
   query, 
@@ -21,6 +24,7 @@ export const useUnifiedCart = (userId) => {
     const [activeCartId, setActiveCartId] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [sharedUsers, setSharedUsers] = useState(0);
 
     const safeToFixed = (number, decimalPlaces) => {
         return number !== undefined && number !== null && !isNaN(number)
@@ -272,6 +276,91 @@ export const useUnifiedCart = (userId) => {
         }
     }, [activeCartId]);
 
+    const addMemberToCartViaLink = useCallback(async (cartId, newMemberId) => {
+        if (!cartId || !newMemberId) return;
+        try {
+            const cartRef = doc(db, 'sharedCarts', cartId);
+            const cartDoc = await getDoc(cartRef);
+            
+            if (cartDoc.exists()) {
+                const cartData = cartDoc.data();
+                if (cartData.members.length < MAX_GROUP_SIZE && !cartData.members.includes(newMemberId)) {
+                    await updateDoc(cartRef, {
+                        members: arrayUnion(newMemberId),
+                        updatedAt: serverTimestamp()
+                    });
+                    console.log(`User ${newMemberId} added to cart ${cartId}`);
+                    return true;
+                } else {
+                    console.log(`Cart ${cartId} is full or user is already a member`);
+                    return false;
+                }
+            } else {
+                console.log(`Cart ${cartId} does not exist`);
+                return false;
+            }
+        } catch (err) {
+            console.error("Error adding member to cart via link: ", err);
+            setError(err);
+            return false;
+        }
+    }, []);
+
+    const generateUniqueCode = () => {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        return Array.from({length: 8}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+    };
+
+    const generateSharingLink = useCallback(async (cartId) => {
+        const uniqueCode = generateUniqueCode();
+        const cartRef = doc(db, 'sharedCarts', cartId);
+        await updateDoc(cartRef, {
+            shareCode: uniqueCode,
+            sharedUserCount: 0
+        });
+        const baseUrl = window.location.origin;
+        return `${baseUrl}/cart/${cartId}/${uniqueCode}`;
+    }, []);
+
+    const joinSharedCart = useCallback(async (cartId, shareCode, userId) => {
+        const cartRef = doc(db, 'sharedCarts', cartId);
+        const cartSnap = await getDoc(cartRef);
+      
+        if (cartSnap.exists() && cartSnap.data().shareCode === shareCode) {
+          const cartData = cartSnap.data();
+          
+          // Check if the group size limit has been reached
+          if (cartData.members && cartData.members.length >= MAX_GROUP_SIZE) {
+            console.log("Cart has reached maximum group size");
+            return false;
+          }
+      
+          // Generate a random user ID for demo purposes
+          const generateRandomUserId = () => {
+            return 'user_' + Math.random().toString(36).substr(2, 9);
+          };
+          const randomUserId = generateRandomUserId();
+      
+          await updateDoc(cartRef, {
+            members: arrayUnion(randomUserId)
+          });
+      
+          console.log(`User ${userId} joined the cart. Random user ${randomUserId} added to members.`);
+          return true;
+        }
+        return false;
+      }, []);
+
+    useEffect(() => {
+        if (activeCartId) {
+            const unsubscribe = onSnapshot(doc(db, 'sharedCarts', activeCartId), (doc) => {
+                if (doc.exists()) {
+                    setSharedUsers(doc.data().sharedUserCount || 0);
+                }
+            });
+            return () => unsubscribe();
+        }
+    }, [activeCartId]);
     return {
         userCarts,
         activeCartId,
@@ -291,6 +380,9 @@ export const useUnifiedCart = (userId) => {
         addMemberToCart,
         voteOnItem,
         completeCart,
-        setActiveCartId
+        setActiveCartId,
+        generateSharingLink,
+        joinSharedCart,
+        sharedUsers,
     };
 };

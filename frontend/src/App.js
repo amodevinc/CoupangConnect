@@ -59,12 +59,17 @@ const AppRoutes = () => {
         </PrivateRoute>
       } />
       <Route path="/loading" element={<Loading />} />
-      <Route path="/share-cart" element={
+      <Route path="/share-cart/:cartId" element={
         <PrivateRoute>
           <ShareCart />
         </PrivateRoute>
       } />
       <Route path="/cart/:cartId" element={
+        <PrivateRoute>
+          <CartScreen userId={user?.uid}/>
+        </PrivateRoute>
+      } />
+      <Route path="/cart/:cartId/:shareCode" element={
         <PrivateRoute>
           <CartScreen userId={user?.uid}/>
         </PrivateRoute>
